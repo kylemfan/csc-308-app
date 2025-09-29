@@ -4,9 +4,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run dev -w packages/react-frontend",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kyle Fan",
