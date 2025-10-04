@@ -84,3 +84,22 @@ app.post("/users", (req, res) => {
   res.status(200).send("User has been successfully added");
 });
 
+const deleteUser = (user) => {
+  users["users_list"] = users["users_list"].filter(
+    (elem) => elem.id !== user.id
+  );
+  return user;
+};
+
+app.delete("/users", (req, res) => {
+  const userToDelete = req.body;
+  deleteUser(userToDelete);
+  res.status(200).send("User successfully deleted");
+});
+
+// TODO: Find a way to use this function in a GET request (with URLs)
+const findUserByNameAndJob = (name, job) => {
+  return users["users_list"]
+    .filter((user) => user["name"] === name)
+    .filter((user) => user["job"] === job);
+};
