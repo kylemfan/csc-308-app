@@ -52,7 +52,12 @@ function MyApp() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(person),
-    });
+    })
+      .then((res) => res.json())
+      .then((json) => setCharacters([...characters, json]))
+      .catch((error) => {
+        console.log(error);
+      });
 
     return promise;
   }
