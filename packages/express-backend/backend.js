@@ -93,7 +93,12 @@ const addUser = (user) => {
   return user;
 };
 
+const generateId = () => {
+  return crypto.randomUUID();
+}
+
 app.post("/users", (req, res) => {
+  req.body.id = generateId();
   const userToAdd = req.body;
   addUser(userToAdd);
   res.status(201).send("User added");
