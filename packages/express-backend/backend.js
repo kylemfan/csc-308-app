@@ -98,21 +98,22 @@ const generateId = () => {
 }
 
 app.post("/users", (req, res) => {
-  req.body.id = generateId();
   const userToAdd = req.body;
+  userToAdd.id = generateId();
   addUser(userToAdd);
-  res.status(201).send("User added");
+  res.status(201).send(userToAdd);
 });
 
-const deleteUser = (user) => {
-  users["users_list"] = users["users_list"].filter(
-    (elem) => elem.id !== user.id
-  );
-  return user;
+const deleteUser = (id) => {
+  users["users_list"] = users["users_list"].filter((user) => user.id !== id);
 };
 
-app.delete("/users", (req, res) => {
-  const userToDelete = req.body;
-  deleteUser(userToDelete);
-  res.status(204).send("User deleted");
+app.delete("/users/:id", (req, res) => {
+  const userToDelete = req.params.id;
+  if (findUserById(userToDelete) === undefined) {
+    res.status(404).end();
+  } else {
+    deleteUser(userToDelete);
+    res.status(204).end();
+  }
 });

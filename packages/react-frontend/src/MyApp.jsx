@@ -6,11 +6,15 @@ import Form from "./Form";
 function MyApp() {
   const [characters, setCharacters] = useState([]);
 
-  function removeOneCharacter(index) {
-    const updated = characters.filter((character, i) => {
-      return i !== index;
+  function removeOneCharacter(id) {
+    const promise = fetch(`http://localhost:8000/users/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-    setCharacters(updated);
+
+    return promise;
   }
 
   function updateList(person) {
@@ -19,10 +23,12 @@ function MyApp() {
         if (res.status !== 201) {
           throw new Error("Could not add user");
         } else {
-          setCharacters([...characters, person])
+          setCharacters([...characters, person]);
         }
       })
-      .catch((error) => { console.log(error); });
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function fetchUsers() {
@@ -34,8 +40,10 @@ function MyApp() {
     fetchUsers()
       .then((res) => res.json())
       .then((json) => setCharacters(json["users_list"]))
-      .catch((error) => { console.log(error); });
-  }, [] );
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   function postUser(person) {
     const promise = fetch("http://localhost:8000/users", {
