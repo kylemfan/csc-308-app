@@ -96,7 +96,7 @@ const addUser = (user) => {
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
   addUser(userToAdd);
-  res.status(201).send("User has been successfully added");
+  res.status(201).send("User added");
 });
 
 const deleteUser = (user) => {
@@ -109,5 +109,5 @@ const deleteUser = (user) => {
 app.delete("/users", (req, res) => {
   const userToDelete = req.body;
   deleteUser(userToDelete);
-  res.status(204).send("User successfully deleted");
+  res.status(204).send("User deleted");
 });
