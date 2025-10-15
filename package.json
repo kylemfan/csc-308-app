@@ -10,7 +10,9 @@
   "license": "ISC",
   "description": "",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "jest_testing",
+    "tdd_assignment"
   ],
   "devDependencies": {
     "nodemon": "^3.1.10"
