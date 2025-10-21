@@ -12,7 +12,14 @@ function MyApp() {
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Delete failed");
+        setCharacters((prev) => prev.filter((user) => user._id !== id));
+      })
+      .catch((error) => {
+        console.log(error)
+      });
 
     return promise;
   }
